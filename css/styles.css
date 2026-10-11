@@ -382,6 +382,8 @@ p code, li code, td code {
   border-radius: 4px;
 }
 
+p code, li code { overflow-wrap: anywhere; }
+
 .diagram {
   margin: 1rem 0 1.3rem;
   padding: 0.85rem;
@@ -550,7 +552,13 @@ p code, li code, td code {
   }
 
   td code,
-  td:first-child code { white-space: normal; }
+  td:first-child code {
+    display: inline-block;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+  }
 
   tr {
     margin: 0 0 0.75rem;
