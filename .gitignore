@@ -1,0 +1,8 @@
+# Track the guide page, its CSS and JS, and the PDF. Ignore everything else.
+*
+!*/
+!.gitignore
+!index.html
+!css/**
+!js/**
+!*.pdf

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Beginner's Guide to Software Development Using Coding Agents</title>
+  <meta name="author" content="Bargava">
+  <meta name="description" content="How a junior developer ships a project with a coding agent. By Bargava.">
+  <meta name="theme-color" content="#f4f7fb">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f4f7fb'/%3E%3Cpath d='M8 22V10h3.2l4.8 7.4L20.8 10H24v12h-2.6v-7.2L17.2 22h-2.4l-4.2-7.2V22z' fill='%2312315c'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to the guide</a>
+  <div class="atmosphere" data-parallax="0.08" aria-hidden="true"></div>
+  <header class="top">
+    <a class="brand" href="#top">Intro to software dev using coding agents</a>
+    <span class="brand-author">Bargava</span>
+    <div class="progress" aria-hidden="true"></div>
+  </header>
+
+  <div class="wrap" id="top">
+    <header class="hero">
+      <p class="hero-ornament" data-parallax="0.12" aria-hidden="true">01–06</p>
+      <p class="kicker">Guide</p>
+      <h1>
+        <span>A Beginner's Guide</span>
+        <span>to Software Development</span>
+        <span>Using Coding Agents</span>
+      </h1>
+      <div class="rule" aria-hidden="true"></div>
+      <p class="byline">Author</p>
+      <p class="dateline">Bargava</p>
+      <p class="dateline">11 October 2026</p>
+      <p class="lede">The repository holds the context, not the chat.</p>
+    </header>
+
+    <div class="layout">
+      <nav class="toc" aria-label="Sections">
+        <a href="#about">About</a>
+        <a href="#what-it-is">The work</a>
+        <a href="#tools">Tools</a>
+        <a href="#setup">Setup</a>
+        <a href="#skills">Skills</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#documents">Documents</a>
+        <a href="#use-the-standard-order">Order</a>
+        <a href="#rules">Rules</a>
+        <a href="#glossary">Glossary</a>
+      </nav>
+
+      <main id="content">
+        <section class="chapter reveal" id="about">
+          <h2>About this document</h2>
+          <h3>Who this is for</h3>
+          <p>This guide is for a junior developer. You choose the project. The agent writes most of the code. You make the decisions, and you check the result. Read the guide from start to end before you start.</p>
+          <h3>What you learn</h3>
+          <p>After you read this document, you can do these tasks:</p>
+          <ul>
+            <li>Install and configure the tools.</li>
+            <li>Explain each phase of software development using coding agents.</li>
+            <li>Use the Matt Pocock skills and the Impeccable skill in the correct order.</li>
+            <li>Find the documents that the process writes, and know what each document controls.</li>
+            <li>Ask the agent how to deploy, which services the project needs, and where an API key goes.</li>
+          </ul>
+          <h3>Writing conventions</h3>
+          <ul>
+            <li><strong>Bold</strong> text shows a name in a user interface or an important term.</li>
+            <li><code>Code font</code> shows a command, a file name, or a value that you type.</li>
+            <li>A command that starts with <code>/</code> is a Claude Code slash command. You type it in the Claude Code prompt.</li>
+            <li>A command that starts with <code>!</code> runs in the shell from the Claude Code prompt.</li>
+          </ul>
+        </section>
+
+        <section class="chapter reveal" id="what-it-is">
+          <h2>What software development using coding agents is</h2>
+          <p>In ordinary software development, you write all the code. In software development using coding agents, an agent (Claude Code) writes most of the code. You still own the work. You do these tasks:</p>
+          <ul>
+            <li>You choose the project and the decisions.</li>
+            <li>You give the agent clear context, in files.</li>
+            <li>You approve the actions that are risky or that you cannot easily undo.</li>
+            <li>You verify the result on real input.</li>
+          </ul>
+          <p>The agent does the research, the writing, the coding, and the testing. You do not accept a result because the agent says it is done. You look at the evidence.</p>
+          <p><strong>Skills</strong> give the agent a repeatable process. A skill is a packaged set of instructions for one type of task. One skill interviews you about a plan. Another skill turns that plan into tickets. You run the skills in order, on whatever project you choose.</p>
+          <p>The work has six phases:</p>
+          <div class="diagram">
+            <pre class="mermaid">flowchart LR
+    A[1. Set up&lt;br/&gt;tools] --&gt; B[2. Define&lt;br/&gt;the product]
+    B --&gt; C[3. Sharpen&lt;br/&gt;the idea]
+    C --&gt; D[4. Plan&lt;br/&gt;the work]
+    D --&gt; E[5. Build&lt;br/&gt;and test]
+    E --&gt; F[6. Deploy&lt;br/&gt;and verify]
+    F -.-&gt;|feedback| C</pre>
+          </div>
+          <p>Each phase writes documents in the repository. The next phase reads those documents. This is the most important rule: <strong class="key">the repository holds the context, not the chat.</strong> A new session can continue the work because the decisions are in files.</p>
+        </section>
+
+        <section class="chapter reveal" id="tools">
+          <h2>Tools you need</h2>
+          <h3>Required applications and accounts</h3>
+          <p>You install these once. The links open the product site.</p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Purpose</th>
+                  <th>How you install it</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Tool"><a href="https://claude.com/claude-code">Claude Code</a></td>
+                  <td data-label="Purpose">The coding agent. It reads and writes files, runs commands, and runs skills.</td>
+                  <td data-label="How you install it">The Claude Code installer. The executable is <code>claude</code>.</td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://www.onorca.dev/">Orca</a></td>
+                  <td data-label="Purpose">The terminal application where you run Claude Code.</td>
+                  <td data-label="How you install it">The Orca installer.</td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://git-scm.com/">Git</a></td>
+                  <td data-label="Purpose">Version control. The agent commits only when you approve.</td>
+                  <td data-label="How you install it">Included with the Windows developer setup.</td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://github.com/">GitHub</a> account and repository</td>
+                  <td data-label="Purpose">Hosts the code and the issue tracker.</td>
+                  <td data-label="How you install it">Web sign-up. Create an empty repository for your project.</td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://cli.github.com/">GitHub CLI</a> (<code>gh</code>)</td>
+                  <td data-label="Purpose">Lets the agent create and read GitHub issues.</td>
+                  <td data-label="How you install it"><code>winget install -e --id GitHub.cli</code></td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://railway.com/">Railway</a> account</td>
+                  <td data-label="Purpose">Hosts the deployed application. It can also host a database.</td>
+                  <td data-label="How you install it">Web sign-up.</td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://docs.railway.com/cli">Railway CLI</a> (<code>railway</code>)</td>
+                  <td data-label="Purpose">Lets you and the agent manage Railway from the terminal.</td>
+                  <td data-label="How you install it"><code>npm i -g @railway/cli</code></td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://docs.railway.com/ai/mcp-server">Railway MCP server</a></td>
+                  <td data-label="Purpose">Gives Claude Code tools to manage Railway projects.</td>
+                  <td data-label="How you install it"><code>claude mcp add --transport http railway https://mcp.railway.com</code></td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://www.python.org/">Python</a></td>
+                  <td data-label="Purpose">A language the agent can use for scripts and for a server.</td>
+                  <td data-label="How you install it"><code>winget install -e --id Python.Python.3.12 --scope user</code></td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://docs.astral.sh/uv/">uv</a></td>
+                  <td data-label="Purpose">A fast Python package manager. Optional.</td>
+                  <td data-label="How you install it"><code>irm https://astral.sh/uv/install.ps1 | iex</code></td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://nodejs.org/">Node.js LTS</a></td>
+                  <td data-label="Purpose">Builds a web interface when the project has one. Includes <code>npm</code>.</td>
+                  <td data-label="How you install it"><code>winget install -e --id OpenJS.NodeJS.LTS --scope user</code></td>
+                </tr>
+                <tr>
+                  <td data-label="Tool"><a href="https://www.docker.com/">Docker</a> (optional)</td>
+                  <td data-label="Purpose">Builds a production image on your machine. Railway can build it for you.</td>
+                  <td data-label="How you install it">Not required on your workstation.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Claude Code plugins (skills)</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Plugin</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Plugin"><code>mattpocock-skills</code></td>
+                  <td data-label="Purpose">The engineering process: interview, glossary, decisions, spec, tickets, implementation, review.</td>
+                </tr>
+                <tr>
+                  <td data-label="Plugin"><code>impeccable</code></td>
+                  <td data-label="Purpose">Product context and user interface design.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="chapter reveal" id="setup">
+          <h2>Set up your workstation</h2>
+          <p>You do these steps once on a new workstation.</p>
+          <h3>Install the tools</h3>
+          <ol>
+            <li><p>Install Claude Code and Orca.</p></li>
+            <li><p>Open a terminal in Orca.</p></li>
+            <li>
+              <p>Install Python, Node.js, and the GitHub CLI for your user account only:</p>
+              <pre><code>winget install -e --id Python.Python.3.12 --scope user
+winget install -e --id OpenJS.NodeJS.LTS --scope user
+winget install -e --id GitHub.cli --scope user</code></pre>
+              <aside class="callout note">
+                <p><strong>Note:</strong> Use <code>--scope user</code>. A machine-wide install shows a Windows administrator prompt (UAC). The agent cannot accept that prompt for you. If you see a UAC prompt, you click <strong>Yes</strong> or <strong>No</strong> yourself.</p>
+              </aside>
+            </li>
+            <li>
+              <p>Install the Railway CLI:</p>
+              <pre><code>npm i -g @railway/cli</code></pre>
+            </li>
+            <li><p>Close the terminal and open a new one. This loads the new <code>PATH</code>.</p></li>
+            <li>
+              <p>Make sure that each tool runs:</p>
+              <pre><code>python --version
+node --version
+gh --version
+railway --version</code></pre>
+            </li>
+          </ol>
+          <h3>Sign in to the services</h3>
+          <ol>
+            <li>
+              <p>Sign in to GitHub:</p>
+              <pre><code>! gh auth login</code></pre>
+            </li>
+            <li>
+              <p>Sign in to Railway:</p>
+              <pre><code>! railway login</code></pre>
+            </li>
+            <li>
+              <p>Add the Railway MCP server to Claude Code:</p>
+              <pre><code>claude mcp add --transport http railway https://mcp.railway.com</code></pre>
+            </li>
+            <li><p>In Claude Code, type <code>/mcp</code>. Select <strong>railway</strong>, and then select <strong>Authenticate</strong>.</p></li>
+            <li>
+              <p>Restart Claude Code with <code>claude --continue</code>.</p>
+              <aside class="callout important">
+                <p><strong>Important:</strong> Claude Code loads MCP tools only when a session starts. After you add or authenticate an MCP server, you restart the session. A restart also stops background agents and local servers. Wait until background work is complete before you restart.</p>
+              </aside>
+            </li>
+          </ol>
+          <h3>Store secrets</h3>
+          <p>A secret is a key that lets your app call an outside service. You never put a key in the chat, and you never commit a key.</p>
+          <ol>
+            <li><p>Ask the agent which service the project needs. For an app that parses a PDF, you can ask which service turns a PDF into fields, and what you must create on that service's website.</p></li>
+            <li>
+              <p>Create the key on that website. Put it in <code>.env.local</code> at the root of the repository:</p>
+              <pre><code>PDF_API_KEY=&lt;your key&gt;</code></pre>
+            </li>
+            <li>
+              <p>Make sure that <code>.gitignore</code> excludes the file:</p>
+              <pre><code>git check-ignore -v .env.local</code></pre>
+            </li>
+            <li><p>When you deploy, add the same name as a Railway variable. The value stays in Railway. It does not go into the chat.</p></li>
+          </ol>
+          <aside class="callout warning">
+            <p><strong>Warning:</strong> Do not paste an API key into the chat. Do not commit an API key. Locally, the key lives in <code>.env.local</code>. In production, it lives in a Railway variable.</p>
+          </aside>
+        </section>
+
+        <section class="chapter reveal" id="skills">
+          <h2>The skills you use</h2>
+          <h3>Matt Pocock skills</h3>
+          <p>The Matt Pocock skills are the engineering process. They move an idea to shipped code on a fixed path. The skills keep the decisions in the repository, so the next session can continue.</p>
+          <div class="diagram">
+            <pre class="mermaid">flowchart TD
+    S[setup-matt-pocock-skills&lt;br/&gt;one time per repo] --&gt; G[grill-with-docs&lt;br/&gt;interview + glossary + ADRs]
+    G --&gt; Q{Can you answer&lt;br/&gt;every question?}
+    Q --&gt;|No| P[prototype&lt;br/&gt;throwaway code]
+    P --&gt; G
+    Q --&gt;|Yes| SP[to-spec&lt;br/&gt;spec as GitHub issue]
+    SP --&gt; T[to-tickets&lt;br/&gt;vertical-slice tickets]
+    T --&gt; I[implement&lt;br/&gt;one ticket per session]
+    I --&gt; CR[code-review&lt;br/&gt;standards + spec]
+    CR --&gt; I</pre>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Skill</th>
+                  <th>What it does</th>
+                  <th>What it makes</th>
+                  <th>How you use it</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Skill"><code>/setup-matt-pocock-skills</code></td>
+                  <td data-label="What it does">Configures the issue tracker, triage labels, and the location of domain documents.</td>
+                  <td data-label="What it makes"><code>CLAUDE.md</code>, <code>docs/agents/*.md</code></td>
+                  <td data-label="How you use it">You choose GitHub Issues and the default labels.</td>
+                </tr>
+                <tr>
+                  <td data-label="Skill"><code>/grill-with-docs</code></td>
+                  <td data-label="What it does">Interviews you in rounds until the decisions are clear. It runs <code>grilling</code> and <code>domain-modeling</code> together.</td>
+                  <td data-label="What it makes"><code>CONTEXT.md</code>, <code>docs/adr/*.md</code></td>
+                  <td data-label="How you use it">You answer each round. The decisions for your project land in files.</td>
+                </tr>
+                <tr>
+                  <td data-label="Skill"><code>/grilling</code></td>
+                  <td data-label="What it does">The interview engine. Each round asks every question that you can answer now, with a recommended answer.</td>
+                  <td data-label="What it makes">Decisions in the chat, then in files</td>
+                  <td data-label="How you use it">You do not type this yourself. <code>grill-with-docs</code> runs it.</td>
+                </tr>
+                <tr>
+                  <td data-label="Skill"><code>/domain-modeling</code></td>
+                  <td data-label="What it does">Keeps one name for each concept. Writes the glossary and the architecture decision records (ADRs).</td>
+                  <td data-label="What it makes"><code>CONTEXT.md</code>, ADRs</td>
+                  <td data-label="How you use it">You use the names from your project. You do not invent a second name for the same thing.</td>
+                </tr>
+                <tr>
+                  <td data-label="Skill"><code>/to-spec</code></td>
+                  <td data-label="What it does">Turns the conversation into a specification.</td>
+                  <td data-label="What it makes">A GitHub issue with user stories</td>
+                  <td data-label="How you use it">You run it after the interview. You read the issue before you approve it.</td>
+                </tr>
+                <tr>
+                  <td data-label="Skill"><code>/to-tickets</code></td>
+                  <td data-label="What it does">Splits the spec into tracer-bullet tickets. Each ticket cuts through every layer. Each ticket names what blocks it.</td>
+                  <td data-label="What it makes">GitHub issues with blocking links</td>
+                  <td data-label="How you use it">You approve the breakdown before any feature code is written.</td>
+                </tr>
+                <tr>
+                  <td data-label="Skill"><code>/implement</code></td>
+                  <td data-label="What it does">Builds one ticket test-first, then runs a code review.</td>
+                  <td data-label="What it makes">Code, tests, a commit</td>
+                  <td data-label="How you use it">You run one ticket per session. See <a href="#use-the-standard-order">Use the standard order</a>.</td>
+                </tr>
+                <tr>
+                  <td data-label="Skill"><code>/ask-matt</code></td>
+                  <td data-label="What it does">Tells you which skill to use next.</td>
+                  <td data-label="What it makes">Advice</td>
+                  <td data-label="How you use it">You ask it when you are not sure of the next step.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <aside class="callout note">
+            <p><strong>Note:</strong> Some skills (<code>/to-spec</code>, <code>/to-tickets</code>, <code>/implement</code>) run only when <strong>you</strong> type them. The agent cannot start them. Type the full name, for example <code>/mattpocock-skills:to-spec</code>, as a message by itself.</p>
+          </aside>
+          <h3>Impeccable skill</h3>
+          <p>The Impeccable skill is the design process. It keeps the interface honest. It does not start with colors and fonts. It starts with the product.</p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Command</th>
+                  <th>What it does</th>
+                  <th>What it makes</th>
+                  <th>How you use it</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Command"><code>/impeccable init</code></td>
+                  <td data-label="What it does">Interviews you about users, purpose, and constraints. It does not ask about visual style.</td>
+                  <td data-label="What it makes"><code>PRODUCT.md</code></td>
+                  <td data-label="How you use it">You describe who the app is for, what it does, and what it must not do.</td>
+                </tr>
+                <tr>
+                  <td data-label="Command"><code>/impeccable</code> (new work)</td>
+                  <td data-label="What it does">Chooses a visual direction, builds the interface, and checks it against a craft floor.</td>
+                  <td data-label="What it makes"><code>DESIGN.md</code>, <code>.impeccable/</code></td>
+                  <td data-label="How you use it">You run it after <code>PRODUCT.md</code> exists, when a ticket needs a screen.</td>
+                </tr>
+                <tr>
+                  <td data-label="Command"><code>impeccable detect</code></td>
+                  <td data-label="What it does">Scans the interface for known design problems.</td>
+                  <td data-label="What it makes">A report</td>
+                  <td data-label="How you use it">You run it before you call the interface finished.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Other commands, such as <code>critique</code>, <code>audit</code>, and <code>polish</code>, refine an interface that already exists. You use them after the first version works.</p>
+        </section>
+
+        <section class="chapter reveal" id="workflow">
+          <h2>The workflow you follow</h2>
+          <p>You follow these steps in order. The project can be anything you can describe in a few sentences. The examples below use an app that parses a PDF, so you can see how to ask. You replace that example with your own project.</p>
+          <div class="diagram">
+            <pre class="mermaid">flowchart TD
+    A[Your idea] --&gt; B[Configure skills&lt;br/&gt;CLAUDE.md]
+    B --&gt; C[Product context&lt;br/&gt;PRODUCT.md]
+    C --&gt; D[Grill the idea&lt;br/&gt;CONTEXT.md and ADRs]
+    D --&gt; E[Prototype&lt;br/&gt;the risky part]
+    E --&gt; F[Spec and tickets]
+    F --&gt; G[Build one ticket]
+    G --&gt; H[Run it on real input]
+    H --&gt; I[Deploy to Railway]
+    I -.-&gt;|feedback| D</pre>
+          </div>
+
+          <h3>Step 1: Write a short brief</h3>
+          <p class="goal"><strong>Goal:</strong> Say what you want to build, in one page.</p>
+          <p>You tell the agent the idea in plain language. You ask it to write <code>docs/productbrief.md</code>. The brief states the user, the outcome, what is out of scope, and the open questions.</p>
+          <p>For a PDF project, the whole brief can start from one sentence: "A person uploads a PDF and sees the fields the parser found."</p>
+
+          <h3>Step 2: Configure the repository</h3>
+          <p class="goal"><strong>Goal:</strong> Tell the skills where issues and domain documents live.</p>
+          <ol>
+            <li>Type <code>/mattpocock-skills:setup-matt-pocock-skills</code>.</li>
+            <li>Answer the questions. You choose:
+              <ul>
+                <li>Issue tracker: GitHub.</li>
+                <li>Triage labels: the defaults.</li>
+                <li>Configuration file: <code>CLAUDE.md</code>.</li>
+              </ul>
+            </li>
+          </ol>
+
+          <h3>Step 3: Capture the product context</h3>
+          <p class="goal"><strong>Goal:</strong> Record the facts that do not change often.</p>
+          <ol>
+            <li>Type <code>/impeccable:impeccable init</code>.</li>
+            <li>Answer the questions about the users, the purpose, and the name of your app.</li>
+          </ol>
+          <p>The result is <code>PRODUCT.md</code>. Later design work reads this file.</p>
+
+          <h3>Step 4: Sharpen the idea</h3>
+          <p class="goal"><strong>Goal:</strong> Make the decisions before you write feature code.</p>
+          <ol>
+            <li>Type <code>/mattpocock-skills:grill-with-docs</code> and give a one-line scope. For the PDF example: "A small app. A person uploads a PDF and sees the parsed fields."</li>
+            <li>Answer each round. Each question has a recommended answer. You accept it in one word, or you change it.</li>
+            <li>Read each update to <code>CONTEXT.md</code> as the agent writes it.</li>
+            <li>Accept the ADRs that the agent offers.</li>
+          </ol>
+          <p>You answer these kinds of questions. The exact questions depend on your project:</p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>What you decide</th>
+                  <th>Where it goes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Question">Who is it for?</td>
+                  <td data-label="What you decide">The person who uses the app, and what they are trying to finish.</td>
+                  <td data-label="Where it goes"><code>PRODUCT.md</code></td>
+                </tr>
+                <tr>
+                  <td data-label="Question">What is in, and what is out?</td>
+                  <td data-label="What you decide">The one outcome, and the things the first version does not do.</td>
+                  <td data-label="Where it goes"><code>PRODUCT.md</code>, <code>CONTEXT.md</code></td>
+                </tr>
+                <tr>
+                  <td data-label="Question">What is the risky part?</td>
+                  <td data-label="What you decide">The piece you are not sure will work. For a PDF app, that piece is the parse.</td>
+                  <td data-label="Where it goes">A short prototype</td>
+                </tr>
+                <tr>
+                  <td data-label="Question">What do you store?</td>
+                  <td data-label="What you decide">What the app keeps, and what it throws away.</td>
+                  <td data-label="Where it goes">An ADR</td>
+                </tr>
+                <tr>
+                  <td data-label="Question">Which outside service?</td>
+                  <td data-label="What you decide">Which API does the hard work, and which key it needs.</td>
+                  <td data-label="Where it goes">An ADR and <code>.env.local</code></td>
+                </tr>
+                <tr>
+                  <td data-label="Question">How does it ship?</td>
+                  <td data-label="What you decide">Railway, and which services (a web service, and a database only if you store data).</td>
+                  <td data-label="Where it goes">An ADR</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <aside class="callout tip">
+            <p><strong>Tip:</strong> A decision can change before you commit it. You ask the agent to rewrite the ADR. After you commit an ADR, you add a new ADR that supersedes it. You do not silently edit the old one.</p>
+          </aside>
+
+          <h3>Step 5: Prototype the risky part</h3>
+          <p class="goal"><strong>Goal:</strong> Prove the hard part with a throwaway script, before you design the whole app.</p>
+          <p>You ask for a small experiment, not a product. For the PDF example, you type:</p>
+          <pre><code>Write a short script that sends one sample PDF to the parsing API and prints the fields. Do not build the website yet. Do not print the API key.</code></pre>
+          <p>You run the script on a real file. You read the fields. If they are wrong, you change the decision now. A prototype is supposed to be thrown away.</p>
+
+          <h3>Step 6: Write the spec and the tickets</h3>
+          <p class="goal"><strong>Goal:</strong> Turn the decisions into work that someone else can track.</p>
+          <ol>
+            <li>Type <code>/mattpocock-skills:to-spec</code>. Read the user stories. Confirm how you will test the app: through the real interface, and with one real input.</li>
+            <li>Type <code>/mattpocock-skills:to-tickets</code>. Read the breakdown. Approve it, or send it back.</li>
+          </ol>
+          <p>Each ticket is a tracer bullet. It goes through every layer that the feature needs, and you can demonstrate it. Later tickets name the tickets that block them:</p>
+          <div class="diagram">
+            <pre class="mermaid">flowchart LR
+    A[Walking skeleton] --&gt; B[First real action]
+    B --&gt; C[Core feature]
+    B --&gt; D[Errors and empty states]
+    C --&gt; E[Deploy]
+    D --&gt; E</pre>
+          </div>
+          <p>For an app that parses a PDF, the core feature is: upload a file and show the fields. You still use these slice names. You do not invent a different process for each project.</p>
+
+          <h3>Step 7: Build one ticket at a time</h3>
+          <p class="goal"><strong>Goal:</strong> Ship a thin slice that you can run.</p>
+          <p>You name one ticket, then you send this as its own message:</p>
+          <pre><code>/mattpocock-skills:implement</code></pre>
+          <p>The agent reads the ticket, <code>CONTEXT.md</code>, and the ADRs. It writes tests first. It shows you the test output. You approve the commit, or you send a correction.</p>
+          <p>You give a sub-agent a job only when the work splits into folders that do not touch the same files. You tell it the folder it owns, the folders it must not touch, the tests to write, and what to report. On a first project, one ticket at a time is enough.</p>
+
+          <h3>Step 8: Run it on real input</h3>
+          <p class="goal"><strong>Goal:</strong> Prove the slice on input that did not come from the tests.</p>
+          <ol>
+            <li>Run the tests.</li>
+            <li>Start the app the way the ticket describes.</li>
+            <li>Use one real input. For a PDF app, that input is a PDF you did not use while writing the tests.</li>
+            <li>Compare the result with the file. If a value is not in the file, the app must not invent it.</li>
+          </ol>
+          <aside class="callout important">
+            <p><strong>Important:</strong> You run the real system on real input before you deploy. Tests with fakes cannot find the mistakes of a model or of an outside API.</p>
+          </aside>
+
+          <h3>Step 9: Deploy to Railway</h3>
+          <p class="goal"><strong>Goal:</strong> Put the app on a public URL, with secrets kept out of the chat.</p>
+          <p>You do not memorize Railway's screens. You ask the agent, and you check its plan before it creates anything. For the PDF example, you type:</p>
+          <pre><code>Deploy this project to Railway. It parses a PDF with an external API. Which Railway services does it need? How do I add the API key? Then deploy it. Do not print the key.</code></pre>
+          <div class="diagram">
+            <pre class="mermaid">sequenceDiagram
+    participant You
+    participant Agent
+    participant Railway
+    You-&gt;&gt;Agent: Which services?
+    Agent-&gt;&gt;You: Web service&lt;br/&gt;Database if needed
+    You-&gt;&gt;Agent: Add the key
+    Agent-&gt;&gt;Railway: Set the variable
+    Railway--&gt;&gt;Agent: Public URL
+    Agent--&gt;&gt;You: Open the URL</pre>
+          </div>
+          <ol>
+            <li>Restart Claude Code so the Railway MCP tools load.</li>
+            <li>Read the list of services. A web service is normal. A database is only for data you decided to store.</li>
+            <li>Create the API key on the provider's website. Add it in Railway under the name from <code>.env.local</code>. You do this yourself, or you approve a tool call that sets the variable without showing you the value in the transcript.</li>
+            <li>Approve the deploy.</li>
+            <li>Open the public URL and try one real file. Check the values by hand.</li>
+          </ol>
+        </section>
+
+        <section class="chapter reveal" id="documents">
+          <h2>Documents that the process writes</h2>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>File</th>
+                  <th>Owner</th>
+                  <th>What it controls</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="File"><code>CLAUDE.md</code></td>
+                  <td data-label="Owner">Matt Pocock setup</td>
+                  <td data-label="What it controls">Where issues and domain documents are. The agent reads it in every session.</td>
+                </tr>
+                <tr>
+                  <td data-label="File"><code>docs/agents/*.md</code></td>
+                  <td data-label="Owner">Matt Pocock setup</td>
+                  <td data-label="What it controls">Issue tracker commands, triage labels, and domain document rules.</td>
+                </tr>
+                <tr>
+                  <td data-label="File"><code>PRODUCT.md</code></td>
+                  <td data-label="Owner">Impeccable init</td>
+                  <td data-label="What it controls">Users, purpose, principles, and constraints.</td>
+                </tr>
+                <tr>
+                  <td data-label="File"><code>DESIGN.md</code></td>
+                  <td data-label="Owner">Impeccable</td>
+                  <td data-label="What it controls">Visual system: colors, type, layout, and components.</td>
+                </tr>
+                <tr>
+                  <td data-label="File"><code>CONTEXT.md</code></td>
+                  <td data-label="Owner">Domain modeling</td>
+                  <td data-label="What it controls">The glossary. One name for each concept.</td>
+                </tr>
+                <tr>
+                  <td data-label="File"><code>docs/adr/*.md</code></td>
+                  <td data-label="Owner">Domain modeling</td>
+                  <td data-label="What it controls">Decisions that are hard to reverse, and why you made them.</td>
+                </tr>
+                <tr>
+                  <td data-label="File"><code>docs/productbrief.md</code></td>
+                  <td data-label="Owner">You and the agent</td>
+                  <td data-label="What it controls">The first description of the idea. Later files replace it when decisions change.</td>
+                </tr>
+                <tr>
+                  <td data-label="File">The specification issue</td>
+                  <td data-label="Owner"><code>to-spec</code></td>
+                  <td data-label="What it controls">The specification and the user stories.</td>
+                </tr>
+                <tr>
+                  <td data-label="File">The tickets</td>
+                  <td data-label="Owner"><code>to-tickets</code></td>
+                  <td data-label="What it controls">The work items, with acceptance criteria and blockers.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="diagram">
+            <pre class="mermaid">flowchart LR
+    PB[productbrief.md] --&gt; PR[PRODUCT.md]
+    PR --&gt; CX[CONTEXT.md]
+    PR --&gt; DS[DESIGN.md]
+    CX --&gt; ADR[ADRs]
+    ADR --&gt; SP[Spec]
+    CX --&gt; SP
+    SP --&gt; TK[Tickets]
+    SP --&gt; CODE[Code]
+    DS --&gt; CODE
+    TK -.-&gt; CODE</pre>
+          </div>
+        </section>
+
+        <section class="chapter reveal" id="use-the-standard-order">
+          <h2>Use the standard order</h2>
+          <p>On a first project, you follow the skill order. You do not build the whole app and write the tickets afterwards.</p>
+          <div class="diagram">
+            <pre class="mermaid">flowchart LR
+    A[grill-with-docs] --&gt; B[prototype&lt;br/&gt;risky parts]
+    B --&gt; C[to-spec]
+    C --&gt; D[to-tickets]
+    D --&gt; E[implement&lt;br/&gt;ticket by ticket]
+    E --&gt; F[deploy]</pre>
+          </div>
+          <ul>
+            <li>You prototype the risky part. A late surprise is more expensive than a thrown-away script.</li>
+            <li>You write the spec, then the tickets, then you implement. The tickets drive the build.</li>
+            <li>You let <code>implement</code> run a code review for each ticket. You read the review.</li>
+          </ul>
+        </section>
+
+        <section class="chapter reveal" id="rules">
+          <h2>Rules for working with the agent</h2>
+          <h3>Give context</h3>
+          <ul>
+            <li>You put decisions in files, not only in the chat.</li>
+            <li>You use the names from <code>CONTEXT.md</code>. You do not invent a second name for the same thing.</li>
+            <li>You give a sub-agent one task, one folder, and the documents to read.</li>
+          </ul>
+          <h3>Keep control</h3>
+          <ul>
+            <li>You approve every action that you cannot easily undo: commits, pushes, deploys, and deletions.</li>
+            <li>You accept a Windows UAC prompt yourself. The agent cannot see it.</li>
+            <li>You type the user-only skills yourself. The agent cannot start them.</li>
+          </ul>
+          <h3>Protect secrets</h3>
+          <ul>
+            <li>You keep keys in <code>.env.local</code> or in Railway variables.</li>
+            <li>You make sure that <code>.gitignore</code> excludes every <code>.env*</code> file before the first commit.</li>
+            <li>You do not paste a key into the chat. You ask the agent where the key goes, not to repeat the key.</li>
+          </ul>
+          <h3>Verify the result</h3>
+          <ul>
+            <li>You read the tests. A test checks behavior, not private details inside the code.</li>
+            <li>You run the real system on real input.</li>
+            <li>When the agent reports a result, you check the evidence: test output, the screen, and the logs.</li>
+          </ul>
+        </section>
+
+        <section class="chapter reveal" id="glossary">
+          <h2>Glossary</h2>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Term</th>
+                  <th>Definition</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Term">ADR</td>
+                  <td data-label="Definition">Architecture decision record. A short file that records one decision and the reason for it.</td>
+                </tr>
+                <tr>
+                  <td data-label="Term">Agent</td>
+                  <td data-label="Definition">A program that reads files, runs commands, and writes code for you. In this guide, that program is Claude Code.</td>
+                </tr>
+                <tr>
+                  <td data-label="Term">MCP</td>
+                  <td data-label="Definition">Model Context Protocol. A standard way to give the agent tools for an outside service, such as Railway.</td>
+                </tr>
+                <tr>
+                  <td data-label="Term">Skill</td>
+                  <td data-label="Definition">A packaged set of instructions for one type of task.</td>
+                </tr>
+                <tr>
+                  <td data-label="Term">Sub-agent</td>
+                  <td data-label="Definition">A separate agent that the main agent starts for one task. It has its own context.</td>
+                </tr>
+                <tr>
+                  <td data-label="Term">Tracer bullet</td>
+                  <td data-label="Definition">A thin ticket that goes through every layer the feature needs, so that you can demonstrate it.</td>
+                </tr>
+                <tr>
+                  <td data-label="Term">UAC</td>
+                  <td data-label="Definition">User Account Control. The Windows prompt that asks for administrator permission.</td>
+                </tr>
+                <tr>
+                  <td data-label="Term">Variable</td>
+                  <td data-label="Definition">A named setting, such as an API key. Locally it lives in <code>.env.local</code>. In production it lives in Railway. It does not live in the chat.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="copies reveal" id="copies">
+          <h2>Copies of this guide</h2>
+          <p>The same guide is in the repository as this page and as a PDF.</p>
+          <div class="copy-links">
+            <a href="https://github.com/rouseguy/ai_sdlc_beginners">GitHub repository</a>
+            <a href="Beginners%20Guide%20to%20Software%20Development%20using%20Coding%20Agents.pdf">PDF</a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="js/site.js"></script>
+</body>
+</html>
