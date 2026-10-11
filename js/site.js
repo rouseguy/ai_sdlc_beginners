@@ -96,6 +96,15 @@ function sizeDiagrams() {
   document.querySelectorAll(".diagram svg").forEach((svg) => {
     const box = svg.viewBox && svg.viewBox.baseVal;
     if (!box || !box.width || !box.height) return;
+    const tall = svg.closest(".diagram-tall");
+    if (tall) {
+      const avail = Math.max(200, tall.clientWidth - 24);
+      const target = Math.min(box.width, avail, 440);
+      svg.style.width = `${target}px`;
+      svg.style.maxWidth = "100%";
+      svg.style.height = `${(box.height / box.width) * target}px`;
+      return;
+    }
     const wide = box.width / box.height > 1.2;
     if (narrow && wide) {
       const target = Math.min(box.width, 920);
