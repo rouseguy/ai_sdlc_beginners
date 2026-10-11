@@ -6,3 +6,6 @@
 !css/**
 !js/**
 !*.pdf
+
+# Local Netlify folder
+.netlify
