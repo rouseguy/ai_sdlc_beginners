@@ -149,15 +149,6 @@ a:hover { color: var(--gold-deep); }
   will-change: transform;
 }
 
-.kicker {
-  margin: 0 0 0.85rem;
-  color: var(--gold-deep);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
 .hero h1 {
   margin: 0;
   max-width: 16ch;
@@ -296,7 +287,8 @@ p { text-wrap: pretty; }
   margin: 0.2rem 0 0.8rem;
   padding: 0.7rem 0.85rem;
   background: var(--paper);
-  border-left: 3px solid var(--gold);
+  border: 1px solid var(--line);
+  border-radius: 12px;
   box-shadow: var(--shadow);
 }
 
@@ -312,16 +304,15 @@ p { text-wrap: pretty; }
   padding: 0.85rem 1rem;
   background: var(--paper);
   border: 1px solid var(--line);
-  border-left-width: 3px;
-  border-radius: 0 12px 12px 0;
+  border-radius: 12px;
 }
 
 .callout p { margin: 0; }
 
-.callout.note { border-left-color: #184e8c; background: #f5f8fc; }
-.callout.important { border-left-color: var(--ink); }
-.callout.warning { border-left-color: #8a4b2f; background: #fbf6f1; }
-.callout.tip { border-left-color: var(--gold); background: #fbf8f1; }
+.callout.note { background: #f5f8fc; }
+.callout.important { background: #f4f7fb; }
+.callout.warning { background: #fbf6f1; }
+.callout.tip { background: #fbf8f1; }
 
 .table-scroll {
   margin: 1rem 0 1.2rem;
@@ -361,8 +352,8 @@ pre {
   overflow-x: auto;
   color: var(--ink);
   background: var(--code-bg);
-  border-left: 3px solid var(--gold);
-  border-radius: 0 12px 12px 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.88rem;
   line-height: 1.55;
@@ -443,7 +434,6 @@ p code, li code { overflow-wrap: anywhere; }
 }
 
 .hero h1 span,
-.kicker,
 .byline,
 .dateline,
 .lede {
@@ -593,7 +583,6 @@ p code, li code { overflow-wrap: anywhere; }
 
   .hero h1 span,
   .rule,
-  .kicker,
   .byline,
   .dateline,
   .lede,
